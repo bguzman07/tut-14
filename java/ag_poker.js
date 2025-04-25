@@ -41,18 +41,6 @@ function playDrawPoker() {
       pokerGame.currentBet = parseInt(e.target.options[e.target.selectedIndex].value);
    };
 
-   // Disable Boker Button
-   function disableObj(obj) {
-      obj.disabled = true;
-      obj.style.opacity = 0.25;
-   }
-
-   // Enable Poker Button
-   function enableObj(obj) {
-      obj.disabled = false;
-      obj.style.opacity = 1;
-   }
-
    // Restart the game when the Reset button is clicked
    resetButton.addEventListener("click", function() {
       pokerGame.currentBank = 500;
@@ -66,6 +54,7 @@ function playDrawPoker() {
    // Enable the Draw and Stand buttons after the deal
    dealButton.addEventListener("click", function() {
       if (pokerGame.currentBank >= pokerGame.currentBet) {
+         handValueText.textContent = "";
          disableObj(dealButton);
          disableObj(betSelection);
          enableObj(drawButton);
@@ -117,11 +106,39 @@ function playDrawPoker() {
          }
          cardImages[i].onclick = null;
       }
+
+      // Evaluate the hand drawn by user
+      handValueText.textContent = myHand.handType();
+
+      // Pay off the final hand
+      bankBox.value = pokerGame.payout(myHand.handOdds());
+
+      console.log(myHand);
+      console.log(myHand.handOdds());
    });
+
    standButton.addEventListener("click", function() {
       enableObj(dealButton);
       enableObj(betSelection);
       disableObj(drawButton);
       disableObj(standButton);
+
+      // Evaluate the hand dealt to the user
+      handValueText.textContent = myHand.handType();
+      
+      // Pay off the final hand
+      bankBox.value = pokerGame.payout(myHand.handOdds());
    });
+   
+   // Disable Boker Button
+   function disableObj(obj) {
+      obj.disabled = true;
+      obj.style.opacity = 0.25;
+   }
+
+   // Enable Poker Button
+   function enableObj(obj) {
+      obj.disabled = false;
+      obj.style.opacity = 1;
+   }
 };
