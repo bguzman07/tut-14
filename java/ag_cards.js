@@ -99,8 +99,8 @@ function pokerDeck() {
       for (var i = 0; i < pokerHand.cards.length; i++) {
          pokerHand.cards[i] = this.cards.shift();
       }
-   }
-};
+   };
+}
 
 /* Constructor function for poker hands */
 function pokerHand(handLength) {
@@ -114,8 +114,7 @@ pokerHand.prototype.highCard = function() {
       this.cards[1].rankValue,
       this.cards[2].rankValue,
       this.cards[3].rankValue,
-      this.cards[4].rankValue,
-   );
+      this.cards[4].rankValue);
 };
 
 /* Test for the presence of a flush */
@@ -148,7 +147,7 @@ pokerHand.prototype.hasStraightFlush = function() {
 /* Test for the presence of a royal flush */
 pokerHand.prototype.hasRoyalFlush = function() {
    return this.hasStraightFlush() && this.highCard() === 14;
-}
+};
 
 /* Test for duplicates in the hand */
 pokerHand.prototype.hasSets = function() {
@@ -213,4 +212,4 @@ pokerHand.prototype.handOdds = function() {
       case "Jacks or Better" : return 1;
       default: return 0;
    }
-}
+};

@@ -112,9 +112,6 @@ function playDrawPoker() {
 
       // Pay off the final hand
       bankBox.value = pokerGame.payout(myHand.handOdds());
-
-      console.log(myHand);
-      console.log(myHand.handOdds());
    });
 
    standButton.addEventListener("click", function() {
